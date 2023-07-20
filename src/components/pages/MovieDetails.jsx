@@ -8,7 +8,6 @@ import { getMovieDetailsById } from 'services/api';
 const MovieDetails = () => {
   const { moviesId } = useParams();
   const [detailInfo, setDetailInfo] = useState();
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const detailInfo = async () => {
@@ -17,7 +16,6 @@ const MovieDetails = () => {
         const data = await getMovieDetailsById(moviesId);
         setDetailInfo(data);
       } catch (error) {
-        setError(error.message);
       }
     };
 
