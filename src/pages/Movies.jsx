@@ -1,7 +1,7 @@
 import MovieList from 'components/MovieList/MovieList';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import NotFound from 'components/NotFound/NotFound';
+import SearchBar from 'components/SearchBar/SearchBar';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { searchMovieByQuery } from 'services/api';
 
@@ -14,6 +14,15 @@ const Movies = () => {
   const updateQueryString = query => {
     const nextParams = query !== '' ? { query } : {};
     setSearchParams(nextParams);
+  };
+
+  const hendleSubmit = evt => {
+    evt.preventDefault();
+    const searchValue = evt.target.children.search.value;
+    setSearchParams({
+      query: searchValue,
+    });
+    updateQueryString(searchValue);
   };
 
   useEffect(() => {
@@ -33,29 +42,18 @@ const Movies = () => {
     searchMovie();
   }, [searchQuery]);
 
-  const hendleSubmit = evt => {
-    evt.preventDefault();
-    const searchValue = evt.target.children.search.value;
-    setSearchParams({
-      query: searchValue,
-    });
-  };
   return (
     <main>
-      <h1>Movies</h1>
-      <form onSubmit={hendleSubmit}>
-        <input
-          type="text"
-          name="search"
-          required
-          value={searchQuery}
-          onChange={e => updateQueryString(e.target.value)}
-          placeholder="Search movies"
-        />
-        <button type="submit">Search</button>
-      </form>
+      <SearchBar
+        onSubmit={hendleSubmit}
+        value={searchQuery}
+        onChange={updateQueryString}
+      ></SearchBar>
 
       {movies.length > 0 && <MovieList movies={movies} />}
+      {searchQuery && movies.length === 0 && (
+        <NotFound message={'No movie found with your request'} />
+      )}
     </main>
   );
 };

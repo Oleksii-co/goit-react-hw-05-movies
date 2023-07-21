@@ -1,17 +1,15 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import NotFound from 'components/NotFound/NotFound';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCreditsById } from 'services/api';
 
 const Cast = () => {
   const { moviesId } = useParams();
   const [credits, setCredits] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     getMovieCreditsById(moviesId).then(data => {
       if (data.length === 0) {
-        setError('We don`t have any cast for this movie');
         return;
       }
       setCredits(data);
@@ -20,9 +18,7 @@ const Cast = () => {
 
   return (
     <>
-      {error ? (
-        <p>{error}</p>
-      ) : (
+      {credits.length > 0 && (
         <ul>
           {credits.map(inf => {
             return (
@@ -41,6 +37,9 @@ const Cast = () => {
             );
           })}
         </ul>
+      )}
+      {credits.length === 0 && (
+        <NotFound message={'We don`t have any cast for this movie'} />
       )}
     </>
   );

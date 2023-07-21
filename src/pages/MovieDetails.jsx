@@ -1,10 +1,7 @@
 import MovieDetailsPage from 'components/MovieDetailsPage/MovieDetailsPage';
-import { useState } from 'react';
-import { useRef } from 'react';
-import { useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { getMovieDetailsById } from 'services/api';
-
 
 const MovieDetails = () => {
   const { moviesId } = useParams();
@@ -12,26 +9,24 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const backLink = useRef(location?.state?.from ?? '/');
-
-
   useEffect(() => {
     const detailInfo = async () => {
-
       try {
         const data = await getMovieDetailsById(moviesId);
         setDetailInfo(data);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     detailInfo();
   }, [moviesId, setDetailInfo]);
 
-  return(
+  return (
     <main>
-   { detailInfo && <MovieDetailsPage backLink={backLink.current} data={detailInfo}/>}
+      {detailInfo && (
+        <MovieDetailsPage backLink={backLink.current} data={detailInfo} />
+      )}
     </main>
-  )
+  );
 };
 
 export default MovieDetails;

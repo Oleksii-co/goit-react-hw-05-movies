@@ -1,9 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+
+
 const MovieListItem = ({ id, title }) => {
   const location = useLocation();
   return (
-    <li>
+    <li> 
       <Link state={{ from: location }} to={`/movies/${id}`}>
         {title}
       </Link>
@@ -12,3 +15,8 @@ const MovieListItem = ({ id, title }) => {
 };
 
 export default MovieListItem;
+
+MovieListItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+};

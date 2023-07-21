@@ -1,17 +1,15 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import NotFound from 'components/NotFound/NotFound';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieReviewsById } from 'services/api';
 
 const Reviews = () => {
   const { moviesId } = useParams();
   const [reviews, setReviews] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     getMovieReviewsById(moviesId).then(data => {
       if (data.length === 0) {
-        setError('We don`t have any reviews for this movie');
         return;
       }
       setReviews(data);
@@ -20,9 +18,7 @@ const Reviews = () => {
 
   return (
     <>
-      {error ? (
-        <p>{error}</p>
-      ) : (
+      {reviews.length > 0 && (
         <ul>
           {reviews.map(inf => {
             return (
@@ -35,6 +31,10 @@ const Reviews = () => {
             );
           })}
         </ul>
+      )}
+
+      {reviews.length === 0 && (
+        <NotFound message={'We don`t have any reviews for this movie'} />
       )}
     </>
   );
