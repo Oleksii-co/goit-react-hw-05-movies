@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 
+import notFoundStyle from './NotFound.module.css'
+
 const NotFound = ({ message }) => {
-  return <p>{message}</p>;
+  return <p className={notFoundStyle.text}>{message}</p>;
 };
 export default NotFound;
 

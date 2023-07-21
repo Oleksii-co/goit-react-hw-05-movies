@@ -11,18 +11,12 @@ const Movies = () => {
 
   const searchQuery = searchParams.get('query') ?? '';
 
-  const updateQueryString = query => {
-    const nextParams = query !== '' ? { query } : {};
-    setSearchParams(nextParams);
-  };
-
   const hendleSubmit = evt => {
     evt.preventDefault();
     const searchValue = evt.target.children.search.value;
     setSearchParams({
       query: searchValue,
     });
-    updateQueryString(searchValue);
   };
 
   useEffect(() => {
@@ -44,11 +38,7 @@ const Movies = () => {
 
   return (
     <main>
-      <SearchBar
-        onSubmit={hendleSubmit}
-        value={searchQuery}
-        onChange={updateQueryString}
-      ></SearchBar>
+      <SearchBar onSubmit={hendleSubmit}></SearchBar>
 
       {movies.length > 0 && <MovieList movies={movies} />}
       {searchQuery && movies.length === 0 && (
