@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCreditsById } from 'services/api';
 
+import castStyle from './Cast.module.css'
+
 const Cast = () => {
   const { moviesId } = useParams();
   const [credits, setCredits] = useState([]);
@@ -19,7 +21,7 @@ const Cast = () => {
   return (
     <>
       {credits.length > 0 && (
-        <ul>
+        <ul className={castStyle.list}>
           {credits.map(inf => {
             return (
               <li key={inf.id}>

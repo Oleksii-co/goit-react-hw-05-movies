@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieReviewsById } from 'services/api';
 
+import reviewsStyle from './Reviews.module.css';
+
 const Reviews = () => {
   const { moviesId } = useParams();
   const [reviews, setReviews] = useState([]);
@@ -19,14 +21,12 @@ const Reviews = () => {
   return (
     <>
       {reviews.length > 0 && (
-        <ul>
+        <ul className={reviewsStyle.list}>
           {reviews.map(inf => {
             return (
               <li key={inf.id}>
-                <div>
-                  <h3>Author: {inf.author}</h3>
-                  <p>{inf.content}</p>
-                </div>
+                <h3>Author: {inf.author}</h3>
+                <p>{inf.content}</p>
               </li>
             );
           })}

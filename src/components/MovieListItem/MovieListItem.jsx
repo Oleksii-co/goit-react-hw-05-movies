@@ -1,15 +1,16 @@
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
+import movieListItemStyle from './MovieListItem.module.css'
 
 const MovieListItem = ({ id, title }) => {
   const location = useLocation();
   return (
-    <li> 
-      <Link state={{ from: location }} to={`/movies/${id}`}>
+    <li className={movieListItemStyle.item}>
+      <NavLink className={movieListItemStyle.link} state={{ from: location }} to={`/movies/${id}`}>
         {title}
-      </Link>
+      </NavLink>
     </li>
   );
 };

@@ -1,0 +1,18 @@
+.link {
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+  border: 1px solid rgb(43, 137, 196);
+  border-radius: 10px;
+  text-decoration: none;
+  padding: 1px;
+  background-color: aquamarine;
+}
+
+.link:hover{
+background-color: #4dd2aa;
+}
+
+.item {
+  list-style: square;
+}

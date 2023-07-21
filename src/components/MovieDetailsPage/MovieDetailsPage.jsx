@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
@@ -12,9 +12,12 @@ const MovieDetailsPage = ({ data, backLink }) => {
 
   return (
     <div>
-      <NavLink className={movieDetailsPageStyle.btn} to={backLink}>
-        Go Back
-      </NavLink>
+      <div>
+        <NavLink className={movieDetailsPageStyle.btn} to={backLink}>
+          Go Back
+        </NavLink>
+      </div>
+
       <div className={movieDetailsPageStyle.container}>
         <img
           src={
@@ -39,27 +42,30 @@ const MovieDetailsPage = ({ data, backLink }) => {
             <p>{genres.map(genre => genre.name).join(', ')}</p>
           </div>
         </div>
-        
       </div>
       <div className={movieDetailsPageStyle.information}>
-          <h3>Addictional Information</h3>
-          <ul className={movieDetailsPageStyle.infList}>
-            <li>
-              <Link state={location.state} to="cast">
-                Cast
-              </Link>
-            </li>
-            <li>
-              <Link state={location.state} to="reviews">
-                Reviews
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <h3>Addictional Information</h3>
+        <ul className={movieDetailsPageStyle.infList}>
+          <li>
+            <NavLink
+              className={movieDetailsPageStyle.navLink}
+              state={location.state}
+              to="cast"
+            >
+              Cast
+            </NavLink>
+          </li>
+          <li>
+            <NavLink state={location.state} to="reviews">
+              Reviews
+            </NavLink>
+          </li>
+        </ul>
+      </div>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

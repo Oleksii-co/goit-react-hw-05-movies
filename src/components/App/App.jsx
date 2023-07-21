@@ -13,7 +13,7 @@ const Reviews = lazy(() => import('components/Reviews/Reviews'));
 export const App = () => {
   return (
     <>
-      <header>
+      <header className={appStyle.header}>
         <nav className={appStyle.nav}>
           <NavLink className={appStyle.navLink} to="/">Home</NavLink>
           <NavLink className={appStyle.navLink} to="/movies">Movies</NavLink>

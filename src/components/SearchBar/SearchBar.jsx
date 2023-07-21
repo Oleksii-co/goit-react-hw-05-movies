@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 
+import searchBarStyle from './SearchBar.module.css'
+
 const SearchBar = ({ onSubmit, value, onChange }) => {
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className={searchBarStyle.form}>
       <input
         type="text"
         name="search"
