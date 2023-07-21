@@ -1,9 +1,10 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 
-const MovieDetailsPage = ({ data }) => {
+const MovieDetailsPage = ({ data, backLink }) => {
+  const location = useLocation();
   return (
     <div>
-        <Link>Go Back</Link>
+      <Link to={backLink}>Go Back</Link>
       <div>
         <img
           src={
@@ -36,10 +37,14 @@ const MovieDetailsPage = ({ data }) => {
           <h3>Addictional Information</h3>
           <ul>
             <li>
-              <Link to="cast">Cast</Link>
+              <Link state={location.state} to="cast">
+                Cast
+              </Link>
             </li>
             <li>
-              <Link to="reviews">Reviews</Link>
+              <Link state={location.state} to="reviews">
+                Reviews
+              </Link>
             </li>
           </ul>
         </div>
